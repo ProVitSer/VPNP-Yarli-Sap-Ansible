@@ -12,5 +12,10 @@ packages_required:
     - libjansson-dev
     - libxml2-dev
     - uuid-dev
+    - libedit-dev
     - libvpb1
     - cifs-utils
+    - aptitude
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common

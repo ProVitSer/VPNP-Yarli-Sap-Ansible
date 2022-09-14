@@ -1,3 +1,6 @@
 ---
 - name: Asterisk Handlers
   import_tasks: asterisk.yml
+
+- name: Selenoid Handlers
+  import_tasks: selenoid.yml

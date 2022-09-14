@@ -1,2 +1,2 @@
 [prod]
-80.249.146.161 ansible_user=root ansible_ssh_pass=sqanf0n4oa
+host ansible_user=root ansible_ssh_pass=password
