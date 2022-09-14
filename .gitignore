@@ -1,1 +1,2 @@
-VPNP-Yarli-SAP-Ansible/defaults/main.yml
+VPNP-Yarli-SAP-Ansible/defaults/*.yml
+config.json.j2
