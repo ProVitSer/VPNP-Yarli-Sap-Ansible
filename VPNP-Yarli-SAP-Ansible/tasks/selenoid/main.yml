@@ -1,0 +1,6 @@
+---
+- name: Docker
+  include_tasks: docker.yml
+
+- name: Selenoid
+  include_tasks: selenoid.yml

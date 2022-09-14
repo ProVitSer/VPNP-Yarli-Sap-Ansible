@@ -1,0 +1,33 @@
+---
+
+- name: Selenoid | Check selenoid container exist
+  shell: 'docker ps -aq --filter "name={{ item }}"'
+  with_items:
+    - 'selenoid'
+  register: found_containers
+
+- name: Selenoid | Remove selenoid container if exist
+  shell: 'docker stop {{ item.item }} && docker rm -fv {{ item.item }}'
+  with_items: '{{ found_containers.results }}'
+  when: item.stdout
+
+- name: Download CM
+  shell: wget -O /usr/bin/cm "https://github.com/aerokube/cm/releases/download/{{ cm_version }}/cm_linux_amd64"
+
+- name: Chmod CM
+  shell: chmod +x /usr/bin/cm
+
+- name: Download browser images and configure
+  raw: /usr/bin/cm selenoid configure --browsers {{ selenoid_chrome_version }}
+
+- name: Run Selenoid
+  raw: /usr/bin/cm selenoid start --vnc --version {{ selenoid_version }}
+
+- name: Run Selenoid UI
+  shell: /usr/bin/cm selenoid-ui start --version {{ selenoid_ui_version }}
+
+- name: Chmod docker
+  shell: chmod o+rw /var/run/docker.sock
+  
+  
+ 
