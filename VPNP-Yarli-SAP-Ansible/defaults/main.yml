@@ -1,0 +1,10 @@
+---
+asterisk_src_dir: /usr/src/asterisk/
+asterisk_version: 16
+
+asterisk_group: asterisk
+asterisk_user: asterisk
+
+
+asterisk_ami_user: sap
+asterisk_ami_password: e4948a4a04565c64d82a6e08c6fe3dfe

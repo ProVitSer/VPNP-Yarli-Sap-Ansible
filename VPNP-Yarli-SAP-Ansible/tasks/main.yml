@@ -1,0 +1,7 @@
+---
+
+- name: "Install requirements"
+  import_tasks: requirements.yml
+
+- name: Build and Install Asterisk
+  import_tasks: asterisk.yml

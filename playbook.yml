@@ -1,0 +1,5 @@
+- name: Install VPNP-Yarli-SAP Server
+  hosts: all
+  become: yes
+  roles:
+    - VPNP-Yarli-SAP-Ansible
