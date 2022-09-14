@@ -1,2 +1,8 @@
 ---
 
+- name: Copy Project config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/opt/vpnp-yarli-sap/src/config/config.json"
+  with_items:
+    - config.json
