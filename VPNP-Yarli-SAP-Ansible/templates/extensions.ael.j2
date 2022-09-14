@@ -1,0 +1,33 @@
+globals {
+        CONSOLE-AEL="Console/dsp";
+        IAXINFO-AEL=guest;
+        OUTBOUND-TRUNK="Zap/g2";
+        OUTBOUND-TRUNKMSD=1;
+};
+
+context crm-3cx {
+    _x. => {
+            NoOp(${EXTEN});
+            Set(CALLERID(num)=${CUT(EXTEN,:,2)});
+            Set(LOCALEXTEN=${CUT(EXTEN,:,1)});
+            NoOp(${CALLERID(num)});
+            NoOp(${LOCALEXTEN});
+            Dial(PJSIP/${LOCALEXTEN}@3cx,,Ttb(handler^addheader^1(${CALLERID(num)},${CALLERID(num)})));
+    }
+}
+
+context handler {
+    addheader => {
+        Set(PJSIP_HEADER(add,Remote-Party-ID)= "${ARG2}" <sip:${ARG1}@{{ server_ip }}>;party=calling;privacy=off;screen=no);
+        return;
+    }
+}
+
+context crm-external {
+        _X. => {
+                NoOp(${var1});
+                Set(CHANNEL(hangup_handler_push)=call-hangup-handler,s,1);
+                Dial(PJSIP/${EXTEN}@3cx,,Ttb(handler^addheader^1(${var1},${var1})));
+        }
+
+}

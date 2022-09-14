@@ -1,5 +1,9 @@
 ---
 
+- name: Check Asterisk Installation
+  stat: path=/etc/init.d/asterisk
+  register: asterisk_status
+
 - name: Remove existing install source dir
   file: "path={{ asterisk_src_dir }} state=absent"
 
@@ -19,14 +23,13 @@
     remote_src: "yes"
     extra_opts: ['--strip-components=1']
 
-
 - name: Asterisk get mp3 source
   shell: "./contrib/scripts/get_mp3_source.sh chdir={{ asterisk_src_dir }}"
   when: not asterisk_status.stat.exists
 
-- name: Install Asterisk dependencies
-  shell: "./contrib/scripts/install_prereq install chdir={{ asterisk_src_dir }}"
-  when: not asterisk_status.stat.exists
+# - name: Install Asterisk dependencies
+#   shell: "./contrib/scripts/install_prereq install chdir={{ asterisk_src_dir }}"
+#   when: not asterisk_status.stat.exists
 
 - name: Configure asterisk
   command: "./configure --with-pjproject-bundled --with-jansson-bundled chdir={{ asterisk_src_dir }}"

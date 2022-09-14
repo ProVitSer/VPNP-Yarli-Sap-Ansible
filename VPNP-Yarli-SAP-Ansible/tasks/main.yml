@@ -1,7 +1,19 @@
 ---
 
-- name: "Install requirements"
-  import_tasks: requirements.yml
+# - name: Install requirements
+#   import_tasks: requirements/requirements.yml
 
-- name: Build and Install Asterisk
-  import_tasks: asterisk.yml
+# - name: Install requirements
+#   import_tasks: requirements/inventory.yml
+
+# - name: Build and Install Asterisk
+#   import_tasks: asterisk/asterisk.yml
+
+# - name: Push Asterisk configuration
+#   import_tasks: asterisk/push_asterisk_configs.yml
+
+# - name: Install NodeJs and PM
+#   import_tasks: project/node.yml
+
+- name: Install NodeJs
+  import_tasks: project/project.yml

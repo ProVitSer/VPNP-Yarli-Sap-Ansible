@@ -1,0 +1,8 @@
+---
+
+- name: Create a record directory if it does not exist
+  file: "path={{ mnt_path }} state=directory"
+
+- name: Mount record path
+  command: mount -t cifs -o username={{ windows_user }},password={{ windows_user_password }} {{ windows_path }} {{ mnt_path }}
+  ignore_errors: yes

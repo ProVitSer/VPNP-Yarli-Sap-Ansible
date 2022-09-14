@@ -1,0 +1,7 @@
+---
+
+- name: reload ael
+  shell: "asterisk -x 'ael reload'"
+
+- name: reload pjsip
+  shell: "asterisk -x 'pjsip reload'"

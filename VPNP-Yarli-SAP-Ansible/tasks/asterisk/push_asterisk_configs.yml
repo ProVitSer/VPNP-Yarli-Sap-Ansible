@@ -1,0 +1,19 @@
+---
+
+- name: Copy Asterisk configs
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/asterisk/{{ item }}"
+    owner: "{{ asterisk_user }}"
+    group: "{{ asterisk_group }}"
+    mode: 0644
+  with_items:
+    - extensions.ael
+    - manager.conf
+    - pjsip.conf
+  
+- name: Core reload Asterisk
+  command: "asterisk -x 'core reload'"
+  notify:
+    - reload ael
+    - reload pjsip

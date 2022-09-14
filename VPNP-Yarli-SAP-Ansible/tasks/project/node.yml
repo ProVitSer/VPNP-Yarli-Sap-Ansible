@@ -1,0 +1,14 @@
+---
+- name: Get Node
+  shell: "curl -fsSL https://deb.nodesource.com/setup_16.x | bash -"
+
+- name: Install NodeJS
+  apt:
+    pkg: "nodejs"
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install PM2
+  npm:
+    name: pm2
+    global: yes

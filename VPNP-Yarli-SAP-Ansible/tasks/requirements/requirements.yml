@@ -1,0 +1,9 @@
+---
+
+- name: update repo.
+  shell: apt update
+
+- name: Install required packages
+  apt:
+    name: "{{ packages_required }}"
+    state: present

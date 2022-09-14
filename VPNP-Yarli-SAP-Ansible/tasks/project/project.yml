@@ -1,0 +1,21 @@
+---
+
+- name: Create a directory if it does not exist
+  file:
+    path: /opt/vpnp-yarli-sap
+    state: directory
+    mode: 715
+
+- name: Checkout a github repo
+  git:
+    repo: https://github.com/ProVitSer/vpnp-yarli-sap.git
+    dest: /opt/vpnp-yarli-sap
+
+- name: Install requarement node
+  shell: "cd /opt/vpnp-yarli-sap && npm install"
+
+- name: Push project config
+  import_tasks: project/push_project_config.yml
+
+- name: Build Project
+  shell: "cd /opt/vpnp-yarli-sap && npm run build"
